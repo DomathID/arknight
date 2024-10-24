@@ -1,3 +1,5 @@
+
+/* Ensure the correct font is loaded */
 @font-face {
   font-family: Bender;
   src: url(../font/Bender.woff);
@@ -330,102 +332,70 @@ body {
   background: linear-gradient(0, #000000, transparent) center center / auto auto
     no-repeat;
   position: absolute;
-content: '';
-  position: absolute;
-  left: 0;
   bottom: 0;
+  left: 0;
   width: 100%;
-  height: 100%;
-  background: linear-gradient(0, #000000, transparent) center center / auto auto
-    no-repeat;
-  background-blend-mode: multiply;
-  color: white;
-  font-size: 0.875rem;
   padding: 0.5rem;
-  opacity: 0.8;
+  color: white;
+  font-size: 0.75rem;
   text-align: center;
 }
 
-/* Slider Style for Image Thumbnails */
+/* Transition effects for the image thumbnails */
 #section-media
   .media-list-wrapper
-  .media-list-item
-  .media-list-item-img[active='true']::after {
-  opacity: 1;
-  background: linear-gradient(0, #ffffff, transparent) center center / auto auto
-    no-repeat;
-  background-blend-mode: lighten;
-}
-
-#section-media .media-list-wrapper .media-list-item:hover {
-  z-index: 2;
-}
-
-/* Media List Item (Image Thumbnail) Behavior */
-#section-media .media-list-wrapper .media-list-item[active='true'] {
-  z-index: 3;
-  transform: scale(1.05);
-}
-
+  .media-list-item.active
+  .media-list-item-img,
 #section-media
   .media-list-wrapper
-  .media-list-item[active='true']
+  .media-list-item:hover
   .media-list-item-img {
   opacity: 1;
+  transform: scale(1.1);
 }
 
-/* Mobile Specific Adjustments */
+/* Responsiveness adjustments for the media list */
 @media only screen and (max-width: 768px) {
-  /* Reduce margin and padding for mobile screens */
-  #section-media {
-    justify-content: center;
-    padding: 1rem;
-  }
-
-  #section-media .media-main-view .media-main-pic {
-    width: 90%; /* Expand image container for mobile */
-  }
-
-  #section-media .media-user-interactive {
-    margin-top: -10rem;
-  }
-
-  #section-media .media-user-interactive .media-current-info {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  #section-media
-    .media-user-interactive
-    .media-current-info
-    .media-info-wrapper
-    .media-info-title {
-    font-size: 2rem; /* Smaller font for mobile */
-  }
-
-  #section-media
-    .media-user-interactive
-    .media-current-info
-    .media-info-wrapper
-    .media-info-serial {
-    font-size: 4rem; /* Smaller serial number for mobile */
-  }
-
-  /* Adjust navigation buttons */
-  #section-media .media-nav-btn {
-    margin: 0 0.5rem;
-  }
-
-  /* Image thumbnail styles for mobile */
   #section-media .media-list-wrapper {
-    margin-top: 3rem;
-    height: 5rem;
+    margin-top: 3rem; /* Reduce top margin for mobile devices */
   }
 
   #section-media .media-list-wrapper .media-list-item {
-    width: 10rem;
-    height: 5rem;
-    padding: 0 1rem;
+    width: 10rem; /* Smaller item size for mobile */
+    height: 5.5rem;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #section-media .media-list-wrapper .media-list-item {
+    width: 8.5rem; /* Further size adjustment for smaller screens */
+    height: 4.5rem;
+  }
+}
+
+/* Utility Classes */
+.hide {
+  display: none !important;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Smooth animations for the media items */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 #canvas {
@@ -436,4 +406,3 @@ content: '';
   height: 100%;
   z-index: index 2;
 }
-    
