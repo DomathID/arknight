@@ -1,3 +1,6 @@
+Certainly! Below is the complete CSS code, incorporating all the adjustments I suggested for mobile responsiveness:
+
+/* Ensure the correct font is loaded */
 @font-face {
   font-family: Bender;
   src: url(../font/Bender.woff);
@@ -12,7 +15,7 @@ html,
 body {
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow-x: hidden; /* Allow vertical scrolling, prevent horizontal overflow */
   margin: 0;
   padding: 0;
   background-color: #070707;
@@ -20,6 +23,7 @@ body {
   font-family: sans-serif;
 }
 
+/* Mobile scaling for better readability */
 @media only screen and (max-width: 1600px) {
   html {
     font-size: 14px;
@@ -27,7 +31,16 @@ body {
 }
 @media only screen and (max-width: 428px), screen and (max-height: 926px) {
   html {
-    font-size: 14px;
+    font-size: 15px;
+  }
+
+  /* Adjust navigation buttons for smaller screens */
+  #section-media .media-nav-btn {
+    width: 4rem;
+  }
+
+  #section-media .media-user-interactive .media-current-info {
+    flex-direction: column; /* Stack items vertically */
   }
 }
 @media only screen and (max-width: 414px), screen and (max-height: 800px) {
@@ -47,7 +60,17 @@ body {
 }
 @media only screen and (max-width: 320px), screen and (max-height: 560px) {
   html {
-    font-size: 11px;
+    font-size: 12px;
+  }
+
+  /* Adjust buttons and layout for very small screens */
+  #section-media .media-nav-btn {
+    width: 3.5rem;
+  }
+
+  #section-media .media-user-interactive .media-current-info {
+    flex-direction: column;
+    align-items: center;
   }
 }
 
@@ -74,18 +97,21 @@ body {
   transform: translateZ(1px);
 }
 
-/* 箭咀樣式 */
+/* Navigation Button Styles */
 #section-media .media-nav-btn {
   position: relative;
   width: 5.63rem;
   flex: none;
   z-index: 1;
+  margin: 0 1rem; /* Adjust margin for mobile screens */
 }
 
 .arrowBtn svg {
   fill: #666666;
   transition: fill 0.3s;
   cursor: pointer;
+  width: 2rem; /* Make buttons smaller for mobile */
+  height: 2rem;
 }
 .arrowBtn svg circle,
 .arrowBtn svg use {
@@ -126,14 +152,13 @@ body {
   transform: translate(-8%, 8%);
 }
 
-/* 左箭咀 */
+/* Adjust arrow button margins for smaller screens */
 #section-media .media-nav-btn.prev {
-  margin-left: 8.13rem;
+  margin-left: 1rem;
 }
 
-/* 右箭咀 */
 #section-media .media-nav-btn.next {
-  margin-right: 8.13rem;
+  margin-right: 1rem;
 }
 
 #section-media .media-main-view .media-main-pic .media-img {
@@ -149,9 +174,10 @@ body {
 
 #section-media .media-main-view .media-main-pic {
   position: relative;
-  width: 51.88rem;
-  height: 29.13rem;
-  margin-left: 5.25rem;
+  width: 80%; /* Changed to percentage for responsiveness */
+  max-width: 800px;
+  height: auto;
+  margin: 0 auto; /* Center-align for smaller screens */
 }
 
 #section-media .media-user-interactive {
@@ -164,10 +190,11 @@ body {
 
 #section-media .media-user-interactive .media-current-info {
   height: 16.25rem;
-  width: 57.13rem;
+  width: 100%; /* Make it span full width */
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  flex-wrap: wrap; /* Allow items to wrap for small screens */
 }
 
 #section-media .media-user-interactive .media-current-info .media-info-wrapper {
@@ -215,7 +242,7 @@ body {
   padding-left: 0.94rem;
 }
 
-/* 輪播右下指示標 */
+/* Navigation Indicator Styles */
 #section-media .media-user-interactive .media-current-info .media-nav-wrapper {
   pointer-events: auto;
 }
@@ -306,26 +333,103 @@ body {
   background: linear-gradient(0, #000000, transparent) center center / auto auto
     no-repeat;
   position: absolute;
+content: '';
+  position: absolute;
   left: 0;
   bottom: 0;
   width: 100%;
-  padding: 0.31rem;
-  padding-top: 0.63rem;
-  transform: translateY(100%);
-  transition: transform 0.3s;
+  height: 100%;
+  background: linear-gradient(0, #000000, transparent) center center / auto auto
+    no-repeat;
+  background-blend-mode: multiply;
+  color: white;
+  font-size: 0.875rem;
+  padding: 0.5rem;
+  opacity: 0.8;
+  text-align: center;
+}
+
+/* Slider Style for Image Thumbnails */
+#section-media
+  .media-list-wrapper
+  .media-list-item
+  .media-list-item-img[active='true']::after {
+  opacity: 1;
+  background: linear-gradient(0, #ffffff, transparent) center center / auto auto
+    no-repeat;
+  background-blend-mode: lighten;
+}
+
+#section-media .media-list-wrapper .media-list-item:hover {
+  z-index: 2;
+}
+
+/* Media List Item (Image Thumbnail) Behavior */
+#section-media .media-list-wrapper .media-list-item[active='true'] {
+  z-index: 3;
+  transform: scale(1.05);
 }
 
 #section-media
   .media-list-wrapper
-  .media-list-item:hover
-  .media-list-item-img::after {
-  transform: translateY(0);
+  .media-list-item[active='true']
+  .media-list-item-img {
+  opacity: 1;
 }
-#canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: index 2;
+
+/* Mobile Specific Adjustments */
+@media only screen and (max-width: 768px) {
+  /* Reduce margin and padding for mobile screens */
+  #section-media {
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  #section-media .media-main-view .media-main-pic {
+    width: 90%; /* Expand image container for mobile */
+  }
+
+  #section-media .media-user-interactive {
+    margin-top: -10rem;
+  }
+
+  #section-media .media-user-interactive .media-current-info {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #section-media
+    .media-user-interactive
+    .media-current-info
+    .media-info-wrapper
+    .media-info-title {
+    font-size: 2rem; /* Smaller font for mobile */
+  }
+
+  #section-media
+    .media-user-interactive
+    .media-current-info
+    .media-info-wrapper
+    .media-info-serial {
+    font-size: 4rem; /* Smaller serial number for mobile */
+  }
+
+  /* Adjust navigation buttons */
+  #section-media .media-nav-btn {
+    margin: 0 0.5rem;
+  }
+
+  /* Image thumbnail styles for mobile */
+  #section-media .media-list-wrapper {
+    margin-top: 3rem;
+    height: 5rem;
+  }
+
+  #section-media .media-list-wrapper .media-list-item {
+    width: 10rem;
+    height: 5rem;
+    padding: 0 1rem;
+  }
 }
+
+    
